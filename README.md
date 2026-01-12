@@ -15,25 +15,37 @@ A terminal-based Pomodoro timer built with Go and [Bubble Tea](https://github.co
 go install github.com/raviboth/pomodoro-go@latest
 ```
 
+Then run with:
+```bash
+pomodoro-go
+```
+
+> **Note:** If `pomodoro-go` isn't found, add Go's bin directory to your PATH:
+> ```bash
+> echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.bashrc  # or ~/.zshrc
+> source ~/.bashrc
+> ```
+
 Or build from source:
 
 ```bash
 git clone https://github.com/raviboth/pomodoro-go.git
 cd pomodoro-go
 go build -o pomodoro .
+./pomodoro
 ```
 
 ## Usage
 
 ```bash
 # Default: 25 min work, 5 min break
-./pomodoro
+pomodoro-go
 
 # Custom durations
-./pomodoro -work 30 -break 10
+pomodoro-go -work 30 -break 10
 
 # Notification modes: none, visual, audio, both (default)
-./pomodoro -notify audio
+pomodoro-go -notify audio
 ```
 
 ## Controls
