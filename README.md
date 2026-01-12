@@ -40,7 +40,7 @@ go build -o pomodoro .
 
 | Key | Action |
 |-----|--------|
-| `g` | Start/pause timer |
+| `space` / `g` | Start/pause timer |
 | `s` | Skip to next phase |
 | `r` | Reset current timer |
 | `q` | Quit |

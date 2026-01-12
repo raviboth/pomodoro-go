@@ -85,7 +85,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "q", "ctrl+c":
 			return m, tea.Quit
-		case "g":
+		case "g", " ":
 			// Toggle start/pause
 			m.running = !m.running
 		case "s":
@@ -230,7 +230,7 @@ func (m Model) View() string {
 	b.WriteString("\n")
 
 	// Help
-	help := "g: start/pause | s: skip | r: reset | q: quit"
+	help := "space/g: start/pause | s: skip | r: reset | q: quit"
 	b.WriteString(helpStyle.Render(help))
 
 	return b.String()

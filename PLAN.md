@@ -6,7 +6,7 @@
 |---------|--------|-------------|
 | Work Timer | ✅ | 25-minute default work sessions |
 | Break Timer | ✅ | 5-minute default break sessions |
-| Start/Pause | ✅ | Toggle with 'g' key |
+| Start/Pause | ✅ | Toggle with space or 'g' key |
 | Skip Phase | ✅ | Skip to next phase with 's' key |
 | Reset | ✅ | Reset current timer with 'r' key |
 | Quit | ✅ | Exit with 'q' or Ctrl+C |
