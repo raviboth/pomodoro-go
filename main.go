@@ -173,13 +173,8 @@ func (m Model) View() string {
 		Foreground(lipgloss.Color("205")).
 		MarginBottom(1)
 
-	timerStyle := lipgloss.NewStyle().
-		Bold(true).
-		Foreground(lipgloss.Color("86")).
-		MarginBottom(1)
-
 	progressStyle := lipgloss.NewStyle().
-		Foreground(lipgloss.Color("170"))
+		Foreground(lipgloss.Color("86"))
 
 	helpStyle := lipgloss.NewStyle().
 		Foreground(lipgloss.Color("241")).
@@ -199,14 +194,11 @@ func (m Model) View() string {
 	b.WriteString(titleStyle.Render(fmt.Sprintf("Pomodoro Timer - %s", stateLabel)))
 	b.WriteString("\n\n")
 
-	// Countdown clock
+	// Progress bar with centered clock
 	minutes := int(m.remaining.Minutes())
 	seconds := int(m.remaining.Seconds()) % 60
 	clock := fmt.Sprintf("%02d:%02d", minutes, seconds)
-	b.WriteString(timerStyle.Render(clock))
-	b.WriteString("\n\n")
 
-	// Progress bar
 	progressWidth := 40
 	elapsed := m.totalDuration - m.remaining
 	progress := 0.0
@@ -214,11 +206,26 @@ func (m Model) View() string {
 		progress = float64(elapsed) / float64(m.totalDuration)
 	}
 	filled := int(progress * float64(progressWidth))
-	empty := progressWidth - filled
 
-	bar := "[" + strings.Repeat("=", filled) + strings.Repeat(" ", empty) + "]"
+	// Build bar with clock centered
+	clockStart := (progressWidth - len(clock)) / 2
+	clockEnd := clockStart + len(clock)
+
+	var bar strings.Builder
+	bar.WriteString("[")
+	for i := 0; i < progressWidth; i++ {
+		if i >= clockStart && i < clockEnd {
+			bar.WriteByte(clock[i-clockStart])
+		} else if i < filled {
+			bar.WriteString("=")
+		} else {
+			bar.WriteString(" ")
+		}
+	}
+	bar.WriteString("]")
+
 	percentage := fmt.Sprintf(" %.0f%%", progress*100)
-	b.WriteString(progressStyle.Render(bar + percentage))
+	b.WriteString(progressStyle.Render(bar.String() + percentage))
 	b.WriteString("\n\n")
 
 	// Status
