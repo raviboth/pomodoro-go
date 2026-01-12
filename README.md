@@ -31,8 +31,8 @@ Or build from source:
 ```bash
 git clone https://github.com/raviboth/pomodoro-go.git
 cd pomodoro-go
-go build -o pomodoro .
-./pomodoro
+go build -o pomodoro-go .
+./pomodoro-go
 ```
 
 ## Usage

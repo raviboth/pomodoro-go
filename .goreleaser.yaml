@@ -10,7 +10,7 @@ builds:
     goarch:
       - amd64
       - arm64
-    binary: pomodoro
+    binary: pomodoro-go
     ldflags:
       - -s -w
 
