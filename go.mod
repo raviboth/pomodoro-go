@@ -1,4 +1,4 @@
-module pomodoro
+module github.com/raviboth/pomodoro-go
 
 go 1.25.5
 
