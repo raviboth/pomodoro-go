@@ -146,6 +146,12 @@ func playSound() {
 			cmd := exec.Command(path, "--volume=65536", soundFile)
 			_ = cmd.Start()
 		}
+	case "windows":
+		// Windows: use PowerShell to play a system sound
+		if path, err := exec.LookPath("powershell"); err == nil {
+			cmd := exec.Command(path, "-c", `(New-Object Media.SoundPlayer 'C:\Windows\Media\Alarm01.wav').PlaySync()`)
+			_ = cmd.Start()
+		}
 	}
 }
 
