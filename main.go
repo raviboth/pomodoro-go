@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -130,11 +131,21 @@ func (m Model) switchPhase() Model {
 
 // playSound plays a notification sound using system audio tools
 func playSound() {
-	soundFile := "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
-	// Use paplay with full volume for reliable playback
-	if path, err := exec.LookPath("paplay"); err == nil {
-		cmd := exec.Command(path, "--volume=65536", soundFile)
-		_ = cmd.Start()
+	switch runtime.GOOS {
+	case "darwin":
+		// macOS: use afplay with a system sound
+		soundFile := "/System/Library/Sounds/Ping.aiff"
+		if path, err := exec.LookPath("afplay"); err == nil {
+			cmd := exec.Command(path, soundFile)
+			_ = cmd.Start()
+		}
+	case "linux":
+		// Linux: use paplay with freedesktop sound
+		soundFile := "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
+		if path, err := exec.LookPath("paplay"); err == nil {
+			cmd := exec.Command(path, "--volume=65536", soundFile)
+			_ = cmd.Start()
+		}
 	}
 }
 
