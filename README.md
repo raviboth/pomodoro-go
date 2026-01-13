@@ -59,8 +59,13 @@ pomodoro-go -notify audio
 
 ## Requirements
 
-- Linux with PulseAudio/PipeWire for audio notifications
-- Desktop notification daemon for visual notifications
+**Audio notifications:**
+- Linux: PulseAudio/PipeWire (`paplay`)
+- macOS: Built-in (`afplay`)
+- Windows: PowerShell
+
+**Visual notifications:**
+- Desktop notification daemon (Linux), Notification Center (macOS), or Windows notifications
 
 ## License
 
